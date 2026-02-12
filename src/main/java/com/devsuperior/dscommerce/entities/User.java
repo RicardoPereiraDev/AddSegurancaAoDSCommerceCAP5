@@ -150,7 +150,7 @@ public class User implements UserDetails {
 		return roles;
 	}
 
-	@Override
+	@Override //Para retornar o email
 	public String getUsername() {
 		return email;
 	}
