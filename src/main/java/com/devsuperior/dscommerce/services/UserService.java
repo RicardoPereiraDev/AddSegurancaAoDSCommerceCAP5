@@ -24,14 +24,16 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private UserRepository repository;
 	
-	@Override
+	@Override //temos que implementar o metodo loadUserByUsername recebendo o username
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
+		//Faz a consulta no banco, se vier vazio lança uma excepção
 		List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
 		if (result.size() == 0) {
 			throw new UsernameNotFoundException("Email not found");
 		}
-		
+
+		//Caso contrario, ou seja, se foi encontrado faz a instancia do user e retorna o user no final
 		User user = new User();
 		user.setEmail(result.get(0).getUsername());
 		user.setPassword(result.get(0).getPassword());
