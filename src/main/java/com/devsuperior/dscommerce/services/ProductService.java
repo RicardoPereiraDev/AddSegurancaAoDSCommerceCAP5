@@ -78,7 +78,7 @@ public class ProductService {
         entity.setPrice(dto.getPrice());
         entity.setImgUrl(dto.getImgUrl());
         
-        entity.getCategories().clear();
+        entity.getCategories().clear(); // aqui limpa-se as categorias antes de inserir as novas
         for (CategoryDTO catDto : dto.getCategories()) {
         	Category cat = new Category();
         	cat.setId(catDto.getId());
