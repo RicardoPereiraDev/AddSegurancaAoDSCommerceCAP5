@@ -43,12 +43,13 @@ public class UserService implements UserDetailsService {
 		
 		return user;
 	}
-	
+
+	/*Fizemos aqui um metodo auxiliar que retorna um user que está logado */
 	protected User authenticated() {
-		try {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		try { // é para se não estiver logado/autenticado e capturar uma excepção
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //vai pegar dentro do contexto da autenticação um user se tiver autenticado
 			Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
-			String username = jwtPrincipal.getClaim("username");
+			String username = jwtPrincipal.getClaim("username"); //o email do user que está no token vai cair na variavel username e eu depois posso utilizar dentro do metodo abaixo findByEmail
 			return repository.findByEmail(username).get();
 		}
 		catch (Exception e) {
@@ -56,9 +57,9 @@ public class UserService implements UserDetailsService {
 		}
 	}
 	
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = true) //Para pegar o user que está logado com base no token que está guardado no contexto do spring security , que é o codigo do metodo authenticated()
 	public UserDTO getMe() {
-		User entity = authenticated();
-		return new UserDTO(entity);
+		User entity = authenticated();//peguei o user do banco
+		return new UserDTO(entity);// Agora vou retornar esse user convertido para UserDTO
 	}
 }

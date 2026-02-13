@@ -24,7 +24,21 @@ public class UserDTO {
 		this.phone = phone;
 		this.birthDate = birthDate;
 	}
-    
+
+
+	/* Explicação do codigo infra:
+
+
+    GrantedAuthority role     --- Para cada permissão do usuário - Cada autoridade (role) do usuário, tratada como uma permissão do Spring Security.”
+	entity.getAuthorities()   --- Pega as roles do usuário
+	for (...)                 --- Percorre cada role
+    role.getAuthority()       --- Pega o nome da role
+    roles.add(...)            --- Adiciona no DTO
+
+
+
+	*/
+
 	public UserDTO(User entity) {
 		id = entity.getId();
 		name = entity.getName();
