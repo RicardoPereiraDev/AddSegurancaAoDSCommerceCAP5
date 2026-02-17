@@ -36,11 +36,12 @@ public class OrderService {
     @Autowired
     private AuthService authService;
 
+    //Neste metodo infra estou estou testando se o user que está loggado é o dono deste pedido ou então é ADMIN, se isso não gerar uma excepção, então eu faço um pedido, se ele não for nem ADMIN nem o proprio user do pedido vai gerar uma excepção e gerar um 403
     @Transactional(readOnly = true)
     public OrderDTO findById(Long id) {
         Order order = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Recurso não encontrado"));
-        authService.validateSelfOrAdmin(order.getClient().getId());
+        authService.validateSelfOrAdmin(order.getClient().getId()); //Aqui é o utilizador que for dono desse pedido, dps pego o cliente associado a esse pedido
         return new OrderDTO(order);
     }
 

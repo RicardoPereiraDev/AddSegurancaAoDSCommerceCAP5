@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 public class OrderController {
 
     @Autowired
-    private OrderService service;
+    private OrderService service ;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
     @GetMapping(value = "/{id}")

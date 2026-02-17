@@ -13,9 +13,9 @@ public class AuthService {
 	private UserService userService;
 	
 	public void validateSelfOrAdmin(long userId) {
-		User me = userService.authenticated();
+		User me = userService.authenticated();//Peguei esse utilizador autenticado, depois na linha abaixo se esse user não tiver ROLE_ADMIN e o ID do utilizador "me" não for igual ao ID que enviei com o parametro("userId") do metdodo validateSelfOrAdmin supra, se isso for verdade quer dizer que ele nem é ADMIN nem é o proprio utilizador aqui do argumento que chegou no metodo
 		if (!me.hasRole("ROLE_ADMIN") && !me.getId().equals(userId)) {
-			throw new ForbiddenException("Access denied");
+			throw new ForbiddenException("Access denied"); //mediante a explicação em cima será lançada uma excepção
 		}
 	}
 }
