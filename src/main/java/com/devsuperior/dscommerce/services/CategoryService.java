@@ -11,7 +11,7 @@ import com.devsuperior.dscommerce.entities.Category;
 import com.devsuperior.dscommerce.repositories.CategoryRepository;
 
 @Service
-public class CategoryService {
+public class  CategoryService {
 
     @Autowired
     private CategoryRepository repository;
@@ -19,6 +19,6 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public List<CategoryDTO> findAll() {
         List<Category> result = repository.findAll();
-        return result.stream().map(x -> new CategoryDTO(x)).toList();
+        return result.stream().map(x -> new CategoryDTO(x)).toList(); //Para cada valor x aqui da minha lista original que é a category, vou criar um new CategoryDTO apartir desse x e depois to.List para converter do stream para lista novamente.
     }
 }
